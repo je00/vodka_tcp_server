@@ -52,13 +52,21 @@ void DebugServer::handleTimeout()
     for (it = clients.begin(); it != clients.end(); it++) {
         QString data;
         double t_s = static_cast<double>(m_pMs)/1000.0;
-        float d[5] = {0.0, 1.1, 2.2, 3.3, 0x7F800000};
+        float d[13] = {0.0, 1.1, 2.2, 3.3, 0x7F800000};
         d[0] = static_cast<float>(sin(2*M_PI*t_s) + sin(M_PI*t_s));
         d[1] = static_cast<float>(sin(M_PI*t_s));
         d[2] = static_cast<float>(sin(M_PI/2*t_s));
         d[3] = static_cast<float>(sin(M_PI/4*t_s));
-        *((int*)&d[4]) = 0x7F800000;
-        QByteArray array((char*)&d[0], 5*sizeof (float));
+        d[4] = static_cast<float>(sin(M_PI/4*t_s));
+        d[5] = static_cast<float>(sin(M_PI/4*t_s));
+        d[6] = static_cast<float>(sin(M_PI/4*t_s));
+        d[7] = static_cast<float>(sin(M_PI/4*t_s));
+        d[8] = static_cast<float>(sin(M_PI/4*t_s));
+        d[9] = static_cast<float>(sin(M_PI/4*t_s));
+        d[10] = static_cast<float>(sin(M_PI/4*t_s));
+        d[11] = static_cast<float>(sin(M_PI/4*t_s));
+        *((int*)&d[12]) = 0x7F800000;
+        QByteArray array((char*)&d[0], 13*sizeof (float));
 //        qDebug() << array.toHex(' ');
         it.key()->write(array);
     }
@@ -100,7 +108,7 @@ void DebugServer::readyReadSlot() {
         while (it.key()->bytesAvailable()) {
             QByteArray vTemp = it.key()->readLine();
             qDebug() << vTemp << ", " << qstrlen(vTemp.data());
-            it.key()->write(vTemp.data(), qstrlen(vTemp.data()));
+//            it.key()->write(vTemp.data(), qstrlen(vTemp.data()));
         }
     }
 }
