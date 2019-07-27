@@ -7,11 +7,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        debugserver.cpp \
+    demoserver.cpp
 
 
 HEADERS += \
-        debugserver.h \
+    demoserver.h
 
 
 # Default rules for deployment.
@@ -20,3 +20,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RC_ICONS = volt+.ico
+
+RESOURCES += \
+    images.qrc

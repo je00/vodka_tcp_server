@@ -1,5 +1,5 @@
-#ifndef DEBUGSERVER_H
-#define DEBUGSERVER_H
+#ifndef DEMOSERVER_H
+#define DEMOSERVER_H
 
 #include <QtCore>
 #include <QTcpServer>
@@ -10,13 +10,13 @@
 #include <QTimer>
 #define TIMER_TIMEOUT   (1)
 
-class DebugServer : public QObject
+class DemoServer : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(int port READ getPort WRITE setPort)
 public:
-    DebugServer();
-    ~DebugServer();
+    DemoServer();
+    ~DemoServer();
 
     int getPort() const;
     void setPort(int value);
@@ -40,6 +40,7 @@ private:
     int port;
     QTimer *m_pTimer;
     uint64_t m_pMs;
+    int image_index_ = 0;
 };
 
 #endif // DEBUGSERVER_H
